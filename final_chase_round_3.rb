@@ -5,12 +5,12 @@ require 'pry'
 
 
 def get_questions
-    json_from_file = File.read("cash_build.json")
+    json_from_file = File.read("final_chase_round_3.json")
     JSON.parse(json_from_file)['results']
 end
 
 
-def run_game
+def begin_round_three
   questions_arr = Array.new(get_questions)
   cash_build = 0;
   round = 1;

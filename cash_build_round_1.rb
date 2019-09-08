@@ -1,7 +1,11 @@
-require 'rest-client'
+require 'tty-prompt'
+require 'tty-table'
+require 'ascii'
+require 'colorize'
 require 'json'
-require 'pry'
 
+@prompt = TTY::Prompt.new
+@Table = TTY::Table.new
 
 
 def get_questions
@@ -42,7 +46,8 @@ def run_game
     round += 1
   end
 
-  puts "Game over! Your final cash build is $#{cash_build}!"
+  puts "Great work! Your final cash build is $#{cash_build}!"
+  round_2_intro
 end
 
 def get_question(questions)
@@ -63,6 +68,7 @@ end
 def delete_question(questions, question)
   questions.delete(question)
 end
+
 
 
 

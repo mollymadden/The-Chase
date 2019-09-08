@@ -48,58 +48,51 @@ def round_2_intro
           end
   end
 
+
+
+
 round_2_intro
 
-
-
-
-def get_questions
+def get_questions_round_2
   json_from_file = File.read("chase_round_2.json")
   JSON.parse(json_from_file)['results']
 end
 
-def run_game
-  questions_arr = Array.new(get_questions)
+def run_round_2
+  questions_arr = Array.new(get_questions_round_2)
   score_count = $to_home;
-  round = 1;
 
   while questions_arr.length > 0
     curr_question = get_question(questions_arr)
     answer_choices = get_answers(curr_question)
 
-    play(round, curr_question, answer_choices)
+    play(curr_question, answer_choices)
 
     user_input = $selection
 
-    if user_input.downcase == 'exit' || user_input.downcase == 'quit' || user_input.downcase == 'stop'
-      puts "Okay, goodbye!"
-      return
-    end
+
 
     correct_answer = curr_question['correct_answer']
     if user_input.downcase == correct_answer.downcase
       puts "\nCorrect"
       score_count -= 1
-      puts "You need #{score_count} to make it home."
+      if score_count != 0
+      puts "You'll need #{score_count} more to make it home."
+      else puts "Nice job! You've made it!!"
+      begin_round_3
+      end
     else
       puts "\nIncorrect"
       puts "The correct answer is #{correct_answer}."
     end
-    # score(curr_question, user_input, score_count)
 
     delete_question(questions_arr, curr_question)
-    round += 1
 
-  if score_count == 0
-    puts "Congrats you've made it home!!"
-    begin_round_3
+
   end
 
   end
-#   if score_count == 0
-#     puts "Game over!"
-#   end
-end
+
 
 
 def get_question(questions)
@@ -113,7 +106,7 @@ def get_answers(question)  #combine correct and incorrect answer choices
   choices.insert(i, question['correct_answer'])
 end
 
-def play(round, question, answers)
+def play(question, answers)
   answers.map { |answer| }
   $selection = @prompt.select("#{question['question']}", answers)
 end
@@ -122,4 +115,4 @@ def delete_question(questions, question)
   questions.delete(question)
 end
 
-run_game
+run_round_2
