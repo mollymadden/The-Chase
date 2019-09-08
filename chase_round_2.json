@@ -177,12 +177,7 @@
     "question":"In order to cut costs, what were most of the extras of Mad Max (1979) paid with?",
     "correct_answer":"Beer",
     "incorrect_answers":["Fast food","Food stamps","They werent paid"]},
-    
-    {"category":"Entertainment: Film","type":"multiple","difficulty":"hard",
-    "question":"What three movies, in order from release date, make up the Dollars Trilogy?",
-    "correct_answer":"A Fistful of Dollars, For a Few Dollars More, The Good, the Bad, and the Ugly",
-    "incorrect_answers":["The Good, the Bad, and the Ugly, For A Few Dollars More, A Fistful of Dollars","For a Few Dollars More, The Good, the Bad, and the Ugly, A Fistful of Dollars","For a Few Dollars More, A Fistful of Dollars, The Good, the Bad, and the Ugly"]},
-    
+        
     {"category":"Entertainment: Film","type":"multiple","difficulty":"hard",
     "question":"Which actors made up the trio in The Good, the Bad, and the Ugly? ",
     "correct_answer":"Clint Eastwood, Eli Wallach, and Lee Van Cleef",
