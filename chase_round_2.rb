@@ -78,17 +78,23 @@ def run_game
 
     correct_answer = curr_question['correct_answer']
     if user_input.downcase == correct_answer.downcase
-      puts "\nThat's correct! Hooray!"
+      puts "\nCorrect"
       score_count -= 1
       puts "You need #{score_count} to make it home."
     else
-      puts "\nWomp womp."
+      puts "\nIncorrect"
       puts "The correct answer is #{correct_answer}."
     end
     # score(curr_question, user_input, score_count)
 
     delete_question(questions_arr, curr_question)
     round += 1
+
+  if score_count == 0
+    puts "Congrats you've made it home!!"
+    begin_round_3
+  end
+
   end
 #   if score_count == 0
 #     puts "Game over!"
