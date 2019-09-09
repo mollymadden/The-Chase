@@ -8,8 +8,7 @@ require 'json'
 @Table = TTY::Table.new
 
 
-$chaser_retorts = ["isn't it obvious you silly git!", "are you having a laugh?", "come off it numpty!",
-"billy no-mates strikes again!", "you're mad as a bag of ferrets.", "that answer was positively barmy!",
+$chaser_retorts = ["isn't it obvious you silly git!", "are you having a laugh?", "come off it numpty!", "you're mad as a bag of ferrets.", "that answer was positively barmy!",
 "you sir are a nitwit!", "wrong as a pointed-eared hobgoblin!", "you are about one bit short of a byte.",
 "you are a sad strange little man, and you have my pity.", "your mother was a hamster and your father smelled of elderbrries!", "I do desire we may be better strangers.",
 "you answer like your momma. unless of course she answers correctly, in which case you answer nothing like her.", "to call you stupid would be an insult to stupid people!", "I've known sheep that could outwit you."]    
@@ -59,6 +58,8 @@ def round_2_intro
 
 round_2_intro
 
+$question_counter = 1
+
 def get_questions_round_2
   json_from_file = File.read("chase_round_2.json")
   JSON.parse(json_from_file)['results']
@@ -72,13 +73,12 @@ def run_round_2
     curr_question = get_question(questions_arr)
     answer_choices = get_answers(curr_question)
 
-    play(curr_question, answer_choices)
+    play($question_counter, curr_question, answer_choices)
 
     user_input = $selection
 
-
-
     correct_answer = curr_question['correct_answer']
+
     if user_input.downcase == correct_answer.downcase
       puts "\nCorrect"
       score_count -= 1
@@ -113,9 +113,10 @@ def get_answers(question)  #combine correct and incorrect answer choices
   choices.insert(i, question['correct_answer'])
 end
 
-def play(question, answers)
+def play(question_counter, question, answers)
   answers.map { |answer| }
-  $selection = @prompt.select("#{question['question']}", answers)
+  $question_counter += 1
+  $selection = @prompt.select("#{question_counter}) #{question['question']}", answers)
 end
 
 def delete_question(questions, question)

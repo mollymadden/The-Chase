@@ -8,13 +8,18 @@ require 'json'
 @Table = TTY::Table.new
 
 
+$chaser_retorts = ["isn't it obvious you silly git!", "are you having a laugh?", "come off it numpty!", "you're mad as a bag of ferrets.", "that answer was positively barmy!",
+"you sir are a nitwit!", "wrong as a pointed-eared hobgoblin!", "you are about one bit short of a byte.",
+"you are a sad strange little man, and you have my pity.", "your mother was a hamster and your father smelled of elderbrries!", "I do desire we may be better strangers.",
+"you answer like your momma. unless of course she answers correctly, in which case you answer nothing like her.", "to call you stupid would be an insult to stupid people!", "I've known sheep that could outwit you."]    
+
 
 def round_2_intro
 
     $chasers = ["The Beast", "The Shark", "The Governess", "Goliath", "The Supernerd"]
     $your_chaser = $chasers.sample
 
-    $cash_build = 10000
+    $cash_build = 26000
     $high_offer = $cash_build * 3
     $low_offer = $cash_build / 4
 
@@ -49,7 +54,16 @@ def round_2_intro
   end
 
 
+round_2_intro
 
+
+# ////////////////////////////////////////////////
+
+
+def get_questions_round_2
+  json_from_file = File.read("chase_round_2.json")
+  JSON.parse(json_from_file)['results']
+end
 
 round_2_intro
 
@@ -69,34 +83,23 @@ def run_round_2
     play(curr_question, answer_choices)
 
     user_input = $selection
-    chaser_answer = correct_answer
-    chaser_score = 8
+
+
 
     correct_answer = curr_question['correct_answer']
-        if user_input.downcase == correct_answer.downcase
-            puts "\nCorrect"
-            score_count -= 1
-            if score_count != 0
-            puts "You'll need #{score_count} more to make it home."
-            else puts "Nice job! You've made it!!"
-                system 'clear'
-            begin_round_3
-            end
-        else
-            puts "\nIncorrect"
-            puts "The correct answer is #{correct_answer}."
-            if chaser_answer == correct_answer
-            puts "\n#{$your_chaser} is hot on your tail!"
-            chaser_score -= 1
-                if chaser_score == score_count
-                puts "You've been caught! Better luck next time!"
-                # system 'clear'
-                else 
-                puts "How embarrasing for #{$your_chaser}"
-                end
-            end
-        end
-
+    if user_input.downcase == correct_answer.downcase
+      puts "\nCorrect"
+      score_count -= 1
+      if score_count != 0
+      puts "You'll need #{score_count} more to make it home."
+      else puts "Nice job! You've made it!!"
+      # begin_round_3
+      end
+    else
+      puts "\nIncorrect"
+      puts "The correct answer is #{correct_answer}."
+      puts "#{$your_chaser} says #{$chaser_retorts.sample}"
+    end
 
     delete_question(questions_arr, curr_question)
 
@@ -119,17 +122,12 @@ def get_answers(question)  #combine correct and incorrect answer choices
 end
 
 def play(question, answers)
-    answers.map { |answer| }
-    $selection = @prompt.select("#{question['question']}", answers)
-  end
+  answers.map { |answer| }
+  $selection = @prompt.select("#{question['question']}", answers)
+end
 
 def delete_question(questions, question)
   questions.delete(question)
 end
 
 run_round_2
-
-
-
-
-
