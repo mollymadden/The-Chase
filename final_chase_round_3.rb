@@ -5,44 +5,39 @@ require 'pry'
 
 
 def get_questions
-    json_from_file = File.read("final_chase_round_3.json")
+    json_from_file = File.read("final_chase.json")
     JSON.parse(json_from_file)['results']
 end
 
-
 def begin_round_three
   questions_arr = Array.new(get_questions)
-  cash_build = 0;
-  round = 1;
+  final_score = 0;
 
   while questions_arr.length > 0
     curr_question = get_question(questions_arr)
     answer_choices = get_answers(curr_question)
 
-    play(round, curr_question, answer_choices)
+    play(curr_question, answer_choices)
 
     user_input = gets.chomp
 
-    if user_input.downcase == 'exit' || user_input.downcase == 'quit' || user_input.downcase == 'stop'
-      puts "Okay, goodbye!"
-      return
-    end
+
 
     correct_answer = curr_question['correct_answer']
     if user_input.downcase == correct_answer.downcase
       puts "\nCorrect."
-      cash_build += 2000
-      puts "Your cash build is now $#{cash_build}."
+      final_score += 1
+      puts "You've moved #{final_score} steps."
     else
       puts "\nIncorrect."
       puts "The correct answer is #{correct_answer}."
     end
 
     delete_question(questions_arr, curr_question)
-    round += 1
+
   end
 
-  puts "Game over! Your final cash build is $#{cash_build}!"
+  puts "Your final score is $#{final_score}! Can the Chaser catch you??"
 end
 
 def get_question(questions)
@@ -56,8 +51,8 @@ def get_answers(question)
   choices.insert(i, question['correct_answer'])
 end
 
-def play(round, question, answers)
-  puts "#{round}. #{question['question']}"
+def play(question, answers)
+  puts "#{question['question']}"
 end
 
 def delete_question(questions, question)
@@ -65,4 +60,4 @@ def delete_question(questions, question)
 end
 
 
-
+begin_round_three

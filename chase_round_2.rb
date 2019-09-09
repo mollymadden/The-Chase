@@ -14,7 +14,7 @@ def round_2_intro
     $chasers = ["The Beast", "The Shark", "The Governess", "Goliath", "The Supernerd"]
     $your_chaser = $chasers.sample
 
-    $cash_build = 10000
+    $cash_build = 26000
     $high_offer = $cash_build * 3
     $low_offer = $cash_build / 4
 
@@ -40,7 +40,7 @@ def round_2_intro
             puts "You'll need 5 correct answers to make it home."
             $to_home = 5.to_i
           when "$#{$low_offer}"
-            table = TTY::Table.new ["#{$your_chaser.colorize(:red)}",], [['---'], ['---'], ['---'], ["$#{low_offer}"], ["---"], ["---"], ["---"], ["Bank".colorize(:yellow)]]
+            table = TTY::Table.new ["#{$your_chaser.colorize(:red)}",], [['---'], ['---'], ['---'], ["$#{$low_offer}"], ["---"], ["---"], ["---"], ["Bank".colorize(:yellow)]]
             puts table.render(:ascii, alignments: [:center])
             $low_offer = $choice
             puts "You'll need 4 correct answers to make it home."
