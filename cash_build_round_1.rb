@@ -3,16 +3,15 @@ require 'tty-table'
 require 'ascii'
 require 'colorize'
 require 'json'
-
-
-
-pid = fork{ exec 'afplay', "intro_sound.mp3" }
+require 'timeout'
 
 
 def get_questions
     json_from_file = File.read("cash_build.json")
     JSON.parse(json_from_file)['results']
 end
+
+
 
 
 def run_game
@@ -71,5 +70,13 @@ def delete_question(questions, question)
 end
 
 
-
+def timeout
+  begin
+    result = Timeout::timeout(15) do
+    run_game
+    end
+  rescue Timeout::Error
+    round_2
+  end
+end
 

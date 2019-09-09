@@ -85,7 +85,7 @@ def run_round_2
       if score_count != 0
       puts "You'll need #{score_count} more to make it home."
       else puts "Nice job! You've made it!!"
-      begin_round_3
+      # begin_round_3
       end
     else
       puts "\nIncorrect"
