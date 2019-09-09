@@ -23,29 +23,28 @@ def round_2_intro
     $high_offer = $cash_build * 3
     $low_offer = $cash_build / 4
 
-    $choice = ""
-
     table = TTY::Table.new ["#{$your_chaser.colorize(:red)}",], [['---'], ["$#{$high_offer}"], ["$#{$cash_build}"], ["$#{$low_offer}"], ["---"], ["---"], ["---"], ["Bank".colorize(:yellow)]]
     puts table.render(:ascii, alignments: [:center])
 
-    menu = @prompt.select("Your chaser today is #{$your_chaser}!! Would you like to play for your cash build of $#{$cash_build}, take the low offer of $#{$low_offer}, or take the high offer of $#{$high_offer}?", 
+    $cash_choice = @prompt.select("Your chaser today is #{$your_chaser}!! Would you like to play for your cash build of $#{$cash_build}, take the low offer of $#{$low_offer}, or take the high offer of $#{$high_offer}?", 
     ["$#{$high_offer}", "$#{$cash_build}", "$#{$low_offer}"])
 
-      case menu
+
+      case $cash_choice
           when "$#{$high_offer}"
-            table = TTY::Table.new ["#{$your_chaser.colorize(:red)}",], [['---'], ["$#{$high_offer}"], ['---'], ['---'], ["---"], ["---"], ["---"], ["Bank".colorize(:yellow)]]
+            table = TTY::Table.new ["#{$your_chaser.colorize(:red)}",], [['---'], ["#{$cash_choice}"], ['---'], ['---'], ["---"], ["---"], ["---"], ["Bank".colorize(:yellow)]]
             puts table.render(:ascii, alignments: [:center])
             $high_offer = $choice
             $to_home = 6.to_i
             puts "You'll need 6 correct answers to make it home."
           when "$#{$cash_build}"
-            table = TTY::Table.new ["#{$your_chaser.colorize(:red)}",], [['---'], ['---'], ["$#{$cash_build}"], ['---'], ["---"], ["---"], ["---"], ["Bank".colorize(:yellow)]]
+            table = TTY::Table.new ["#{$your_chaser.colorize(:red)}",], [['---'], ['---'], ["#{$cash_choice}"], ['---'], ["---"], ["---"], ["---"], ["Bank".colorize(:yellow)]]
             puts table.render(:ascii, alignments: [:center])
             $cash_build = $choice
             puts "You'll need 5 correct answers to make it home."
             $to_home = 5.to_i
           when "$#{$low_offer}"
-            table = TTY::Table.new ["#{$your_chaser.colorize(:red)}",], [['---'], ['---'], ['---'], ["$#{$low_offer}"], ["---"], ["---"], ["---"], ["Bank".colorize(:yellow)]]
+            table = TTY::Table.new ["#{$your_chaser.colorize(:red)}",], [['---'], ['---'], ['---'], ["#{$cash_choice}"], ["---"], ["---"], ["---"], ["Bank".colorize(:yellow)]]
             puts table.render(:ascii, alignments: [:center])
             $low_offer = $choice
             puts "You'll need 4 correct answers to make it home."
@@ -68,6 +67,7 @@ end
 def run_round_2
   questions_arr = Array.new(get_questions_round_2)
   score_count = $to_home;
+  incorrect_count = 0
 
   while questions_arr.length > 0
     curr_question = get_question(questions_arr)
@@ -88,9 +88,11 @@ def run_round_2
       # begin_round_3
       end
     else
+      incorrect_count += 1
       puts "\nIncorrect"
       puts "The correct answer is #{correct_answer}."
       puts "#{$your_chaser} says #{$chaser_retorts.sample}"
+      puts "That's #{incorrect_count} wrong so far.".colorize(:red)
     end
 
     delete_question(questions_arr, curr_question)
