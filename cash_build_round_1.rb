@@ -5,25 +5,21 @@ require 'colorize'
 require 'json'
 require 'timeout'
 
-
 def get_questions
     json_from_file = File.read("cash_build.json")
     JSON.parse(json_from_file)['results']
 end
 
 
-
-
 def run_game
   questions_arr = Array.new(get_questions)
-  cash_build = 0;
-  round = 1;
+  $cash_build = 0;
 
   while questions_arr.length > 0
     curr_question = get_question(questions_arr)
     answer_choices = get_answers(curr_question)
 
-    play(round, curr_question, answer_choices)
+    play(curr_question, answer_choices)
 
     user_input = gets.chomp
 
@@ -35,19 +31,15 @@ def run_game
     correct_answer = curr_question['correct_answer']
     if user_input.downcase == correct_answer.downcase
       puts "\nCorrect."
-      cash_build += 2000
-      puts "Your cash build is now $#{cash_build}."
+      $cash_build += 2000
+      puts "Your cash build is now $#{$cash_build}."
     else
       puts "\nIncorrect."
       puts "The correct answer is #{correct_answer}."
     end
 
     delete_question(questions_arr, curr_question)
-    round += 1
   end
-
-  puts "Great work! Your final cash build is $#{cash_build}!"
-  round_2_intro
 end
 
 def get_question(questions)
@@ -61,8 +53,8 @@ def get_answers(question)
   choices.insert(i, question['correct_answer'])
 end
 
-def play(round, question, answers)
-  puts "#{round}. #{question['question']}"
+def play(question, answers)
+  puts "#{question['question']}"
 end
 
 def delete_question(questions, question)
@@ -72,11 +64,12 @@ end
 
 def timeout
   begin
-    result = Timeout::timeout(15) do
+    result = Timeout::timeout(30) do
     run_game
     end
   rescue Timeout::Error
-    round_2
+    puts "Great work! Your final cash build is $#{$cash_build}!"
+    # round_2_intro
   end
 end
 
