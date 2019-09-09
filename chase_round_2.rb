@@ -8,6 +8,12 @@ require 'json'
 @Table = TTY::Table.new
 
 
+$chaser_retorts = ["isn't it obvious you silly git!", "are you having a laugh?", "come off it numpty!",
+"billy no-mates strikes again!", "you're mad as a bag of ferrets.", "that answer was positively barmy!",
+"you sir are a nitwit!", "wrong as a pointed-eared hobgoblin!", "you are about one bit short of a byte.",
+"you are a sad strange little man, and you have my pity.", "your mother was a hamster and your father smelled of elderbrries!", "I do desire we may be better strangers.",
+"you answer like your momma. unless of course she answers correctly, in which case you answer nothing like her.", "to call you stupid would be an insult to stupid people!", "I've known sheep that could outwit you."]    
+
 
 def round_2_intro
 
@@ -84,6 +90,7 @@ def run_round_2
     else
       puts "\nIncorrect"
       puts "The correct answer is #{correct_answer}."
+      puts "#{$your_chaser} says #{$chaser_retorts.sample}"
     end
 
     delete_question(questions_arr, curr_question)
