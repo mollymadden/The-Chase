@@ -52,20 +52,20 @@ def round_2_intro
             puts $table.to_table
             $high_offer = $choice
             $to_home = 6.to_i
-            puts "You'll need 6 correct answers to make it home."
+            puts "You'll need 6 correct answers to make it to the bank."
           when "$#{$cash_build}"
             mid_table = ["#{$your_chaser.colorize(:red)}", $b, $b, "$#{$cash_build}", $b, $b, $b, $b, "Bank".colorize(:yellow)]
             $table = mid_table
             puts $table.to_table
             $cash_build = $choice
-            puts "You'll need 5 correct answers to make it home."
+            puts "You'll need 5 correct answers to make it to the bank."
             $to_home = 5.to_i
           when "$#{$low_offer}"
-            low_table = ["#{$your_chaser.colorize(:red)}", $b, $b, $b, "$#{low_offer}", $b, $b, $b, "Bank".colorize(:yellow)]
+            low_table = ["#{$your_chaser.colorize(:red)}", $b, $b, $b, "$#{$low_offer}", $b, $b, $b, "Bank".colorize(:yellow)]
             $table = low_table
             puts $table.to_table
             $low_offer = $choice
-            puts "You'll need 4 correct answers to make it home."
+            puts "You'll need 4 correct answers to make it to the bank."
             $to_home = 4.to_i
           end
   end
@@ -94,28 +94,34 @@ def run_round_2
 
     correct_answer = curr_question['correct_answer']
 
+    
     if user_input.downcase == correct_answer.downcase
       puts "\nCorrect"
       score_count -= 1
-
-        score_count < $table.length
-        # puts table.to_table
-        $table.unshift($b) #puts new b to the top
-        $table.delete_at(score_count-=1) #deletes 
+        $table.insert(2,$b) #puts new b above cash
+        $table.delete_at(7) #deletes b above 'bank'
         puts $table.to_table
 
-      if score_count != 0
-      puts "You'll need #{score_count} more to make it home."
-      else puts "Nice job! You've made it!!"
-      # begin_round_3
-      end
+            if score_count != 0
+            puts "You'll need #{score_count} more to make it to the bank"
+            else puts "Nice job! You've made it!!"
+            # begin_round_3
+            end
     else
       incorrect_count += 1
       puts "\nIncorrect"
       puts "The correct answer is #{correct_answer}."
       puts "#{$your_chaser} says #{$chaser_retorts.sample}"
       puts "That's #{incorrect_count} wrong so far.".colorize(:red)
+      puts $table.to_table
+      # chaser_method
     end
+    # if $question_counter % 4 != 0
+    #   puts "#{$your_chaser} chose the correct answer"
+    #   $table.insert(0,$b) #puts new b above cash
+    #   $table.delete_at(2) #deletes b below chaser
+    #   puts $table.to_table
+    # end
 
 
 
