@@ -1,14 +1,17 @@
-# def chaser_bot
-# chaser_score = 0
-# if question_counter % 4 == 0
-#     puts "The Chaser guessed incorrectly! Lucky!"
-# else
-#     puts "The Chaser guessed #{correct_answer}"
-#     chaser_score += 1
-# end
-# end
 
-# if score_count = question_counter
+      def chaser_method
+        chaser_score = 0
+        if $question_counter % 4 == 0
+            puts "#{$your_chaser} guessed incorrectly! Lucky!"
+            show_table
+        else
+            puts "#{$your_chaser} guessed correctly."
+            chaser_score += 1
+            show_table
+        end
+        chaser_method
+      end
+
 
 
 table = TTY::Table.new ["#{$your_chaser.colorize(:red)}",], [['---'], ["$#{$high_offer}"], ["$#{$cash_build}"], ["$#{$low_offer}"], ["---"], ["---"], ["---"], ["Bank".colorize(:yellow)]]
