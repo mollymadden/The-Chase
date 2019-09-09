@@ -26,18 +26,19 @@ $chaser_retorts =
 "to call you stupid would be an insult to stupid people!", 
 "I've known sheep that could outwit you."]    
 
+$chasers = ["The Beast", "The Shark", "The Governess", "Goliath", "The Supernerd"]
+$your_chaser = $chasers.sample
+
+$cash_build = 26000
+$high_offer = $cash_build * 3
+$low_offer = $cash_build / 4
+$b = "---"
 
 def round_2_intro
 
-    $chasers = ["The Beast", "The Shark", "The Governess", "Goliath", "The Supernerd"]
-    $your_chaser = $chasers.sample
 
-    $cash_build = 26000
-    $high_offer = $cash_build * 3
-    $low_offer = $cash_build / 4
-    b = "---"
 
-    opening_table = ["#{$your_chaser.colorize(:red)}", b, b, "$#{$cash_build}", b, b, b, b, "Bank".colorize(:yellow)]
+    opening_table = ["#{$your_chaser.colorize(:red)}", $b, "$#{$high_offer}", "$#{$cash_build}", "$#{$low_offer}", $b, $b, $b, "Bank".colorize(:yellow)]
     puts opening_table.to_table
 
     $cash_choice = @prompt.select("Your chaser today is #{$your_chaser}!! Would you like to play for your cash build of $#{$cash_build}, take the low offer of $#{$low_offer}, or take the high offer of $#{$high_offer}?", 
@@ -46,23 +47,23 @@ def round_2_intro
 
       case $cash_choice
           when "$#{$high_offer}"
-            high_table = ["#{$your_chaser.colorize(:red)}", b, "$#{$high_offer}", b, b, b, b, b, "Bank".colorize(:yellow)]
-            table = high_table
-            puts table.to_table
+            high_table = ["#{$your_chaser.colorize(:red)}", $b, "$#{$high_offer}", $b, $b, $b, $b, $b, "Bank".colorize(:yellow)]
+            $table = high_table
+            puts $table.to_table
             $high_offer = $choice
             $to_home = 6.to_i
             puts "You'll need 6 correct answers to make it home."
           when "$#{$cash_build}"
-            mid_table = ["#{$your_chaser.colorize(:red)}", b, b, "$#{$cash_build}", b, b, b, b, "Bank".colorize(:yellow)]
-            table = mid_table
-            puts table.to_table
+            mid_table = ["#{$your_chaser.colorize(:red)}", $b, $b, "$#{$cash_build}", $b, $b, $b, $b, "Bank".colorize(:yellow)]
+            $table = mid_table
+            puts $table.to_table
             $cash_build = $choice
             puts "You'll need 5 correct answers to make it home."
             $to_home = 5.to_i
           when "$#{$low_offer}"
-            low_table = ["#{$your_chaser.colorize(:red)}", b, b, b, "$#{low_offer}", b, b, b, "Bank".colorize(:yellow)]
-            table = low_table
-            puts table.to_table
+            low_table = ["#{$your_chaser.colorize(:red)}", $b, $b, $b, "$#{low_offer}", $b, $b, $b, "Bank".colorize(:yellow)]
+            $table = low_table
+            puts $table.to_table
             $low_offer = $choice
             puts "You'll need 4 correct answers to make it home."
             $to_home = 4.to_i
@@ -96,6 +97,13 @@ def run_round_2
     if user_input.downcase == correct_answer.downcase
       puts "\nCorrect"
       score_count -= 1
+
+        score_count < $table.length
+        # puts table.to_table
+        $table.unshift($b) #puts new b to the top
+        $table.delete_at(score_count-=1) #deletes 
+        puts $table.to_table
+
       if score_count != 0
       puts "You'll need #{score_count} more to make it home."
       else puts "Nice job! You've made it!!"

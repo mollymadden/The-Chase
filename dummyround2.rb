@@ -1,5 +1,5 @@
 require 'tty-prompt'
-require 'tty-table'
+require 'text-table'
 require 'ascii'
 require 'colorize'
 require 'json'
@@ -26,19 +26,20 @@ $chaser_retorts =
 "to call you stupid would be an insult to stupid people!", 
 "I've known sheep that could outwit you."]    
 
+$chasers = ["The Beast", "The Shark", "The Governess", "Goliath", "The Supernerd"]
+$your_chaser = $chasers.sample
+
+$cash_build = 26000
+$high_offer = $cash_build * 3
+$low_offer = $cash_build / 4
+$b = "---"
 
 def round_2_intro
 
-    $chasers = ["The Beast", "The Shark", "The Governess", "Goliath", "The Supernerd"]
-    $your_chaser = $chasers.sample
 
-    $cash_build = 26000
-    $high_offer = $cash_build * 3
-    $low_offer = $cash_build / 4
-    blanks = "---"
 
-    opening_table = TTY::Table.new [["#{$your_chaser.colorize(:red)}"], [blanks], ["$#{$high_offer}"], ["$#{$cash_build}"], ["$#{$low_offer}"], [blanks], [blanks], [blanks], ["Bank".colorize(:yellow)]]
-    puts opening_table.render(:ascii, alignments: [:center])
+    opening_table = ["#{$your_chaser.colorize(:red)}", $b, "$#{$high_offer}", "$#{$cash_build}", "$#{$low_offer}", $b, $b, $b, "Bank".colorize(:yellow)]
+    puts opening_table.to_table
 
     $cash_choice = @prompt.select("Your chaser today is #{$your_chaser}!! Would you like to play for your cash build of $#{$cash_build}, take the low offer of $#{$low_offer}, or take the high offer of $#{$high_offer}?", 
     ["$#{$high_offer}", "$#{$cash_build}", "$#{$low_offer}"])
@@ -46,31 +47,28 @@ def round_2_intro
 
       case $cash_choice
           when "$#{$high_offer}"
-            high_table = TTY::Table.new [["#{$your_chaser.colorize(:red)}"], [blanks], ["#{$cash_choice}"], [blanks], [blanks], [blanks], [blanks], [blanks], ["Bank".colorize(:yellow)]]
-            puts high_table.render(:ascii, alignments: [:center])
-            table = high_table
+            high_table = ["#{$your_chaser.colorize(:red)}", $b, "$#{$high_offer}", $b, $b, $b, $b, $b, "Bank".colorize(:yellow)]
+            $table = high_table
+            puts $table.to_table
             $high_offer = $choice
             $to_home = 6.to_i
-            puts "You'll need 6 correct answers to make it home."
+            puts "You'll need 6 correct answers to make it to the bank."
           when "$#{$cash_build}"
-            mid_table = TTY::Table.new [["#{$your_chaser.colorize(:red)}"], [blanks], [blanks], ["#{$cash_choice}"], [blanks], [blanks], [blanks], [blanks], ["Bank".colorize(:yellow)]]
-            puts mid_table.render(:ascii, alignments: [:center])
-            table = mid_table
+            mid_table = ["#{$your_chaser.colorize(:red)}", $b, $b, "$#{$cash_build}", $b, $b, $b, $b, "Bank".colorize(:yellow)]
+            $table = mid_table
+            puts $table.to_table
             $cash_build = $choice
-            puts "You'll need 5 correct answers to make it home."
+            puts "You'll need 5 correct answers to make it to the bank."
             $to_home = 5.to_i
           when "$#{$low_offer}"
-            low_table = TTY::Table.new [["#{$your_chaser.colorize(:red)}"], [blanks], [blanks], [blanks], ["#{$cash_choice}"], [blanks], [blanks], [blanks], ["Bank".colorize(:yellow)]]
-            puts low_table.render(:ascii, alignments: [:center])
-            table = low_table
+            low_table = ["#{$your_chaser.colorize(:red)}", $b, $b, $b, "$#{$low_offer}", $b, $b, $b, "Bank".colorize(:yellow)]
+            $table = low_table
+            puts $table.to_table
             $low_offer = $choice
-            puts "You'll need 4 correct answers to make it home."
+            puts "You'll need 4 correct answers to make it to the bank."
             $to_home = 4.to_i
           end
   end
-
-
-
 
 round_2_intro
 
@@ -96,21 +94,34 @@ def run_round_2
 
     correct_answer = curr_question['correct_answer']
 
+    
     if user_input.downcase == correct_answer.downcase
       puts "\nCorrect"
       score_count -= 1
-      if score_count != 0
-      puts "You'll need #{score_count} more to make it home."
-      else puts "Nice job! You've made it!!"
-      # begin_round_3
-      end
+        $table.insert(2,$b) #puts new b above cash
+        $table.delete_at(7) #deletes b above 'bank'
+        puts $table.to_table
+
+            if score_count != 0
+            puts "You'll need #{score_count} more to make it to the bank"
+            else puts "Nice job! You've made it!!"
+            # begin_round_3
+            end
     else
       incorrect_count += 1
       puts "\nIncorrect"
       puts "The correct answer is #{correct_answer}."
       puts "#{$your_chaser} says #{$chaser_retorts.sample}"
       puts "That's #{incorrect_count} wrong so far.".colorize(:red)
+      puts $table.to_table
+      # chaser_method
     end
+    # if $question_counter % 4 != 0
+    #   puts "#{$your_chaser} chose the correct answer"
+    #   $table.insert(0,$b) #puts new b above cash
+    #   $table.delete_at(2) #deletes b below chaser
+    #   puts $table.to_table
+    # end
 
 
 
