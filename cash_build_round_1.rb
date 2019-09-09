@@ -4,8 +4,9 @@ require 'ascii'
 require 'colorize'
 require 'json'
 
-@prompt = TTY::Prompt.new
-@Table = TTY::Table.new
+
+
+pid = fork{ exec 'afplay', "intro_sound.mp3" }
 
 
 def get_questions

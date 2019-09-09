@@ -1,9 +1,7 @@
 require_relative "./cash_build_round_1.rb"
 
 def intro_sound
-    # pid = fork{ exec 'mpg123','-q', intro_sound.mp3 }
-    # pid = fork {exec ‘afplay’, “intro_sound.mp3”} 
-    # pid = fork {exec ‘killall’, “afplay”}
+  pid = fork{ exec 'afplay', "intro_sound.mp3" }
 end
 
 def initiate
