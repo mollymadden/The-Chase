@@ -1,17 +1,30 @@
 require 'tty-prompt'
-require 'tty-table'
+require 'text-table'
 require 'ascii'
 require 'colorize'
 require 'json'
 
+
+
+
 @prompt = TTY::Prompt.new
-@Table = TTY::Table.new
 
 
-$chaser_retorts = ["isn't it obvious you silly git!", "are you having a laugh?", "come off it numpty!", "you're mad as a bag of ferrets.", "that answer was positively barmy!",
-"you sir are a nitwit!", "wrong as a pointed-eared hobgoblin!", "you are about one bit short of a byte.",
-"you are a sad strange little man, and you have my pity.", "your mother was a hamster and your father smelled of elderbrries!", "I do desire we may be better strangers.",
-"you answer like your momma. unless of course she answers correctly, in which case you answer nothing like her.", "to call you stupid would be an insult to stupid people!", "I've known sheep that could outwit you."]    
+
+$chaser_retorts = 
+["isn't it obvious you silly git!", "are you having a laugh?", 
+"come off it numpty!", 
+"you're mad as a bag of ferrets.", 
+"that answer was positively barmy!",
+"you sir are a nitwit!", 
+"wrong as a pointed-eared hobgoblin!", 
+"you are about one bit short of a byte.",
+"you are a sad strange little man, and you have my pity.", 
+"your mother was a hamster and your father smelled of elderbrries!", 
+"I do desire we may be better strangers.",
+"you answer like your momma. unless of course she answers correctly, in which case you answer nothing like her.", 
+"to call you stupid would be an insult to stupid people!", 
+"I've known sheep that could outwit you."]    
 
 
 def round_2_intro
@@ -22,9 +35,10 @@ def round_2_intro
     $cash_build = 26000
     $high_offer = $cash_build * 3
     $low_offer = $cash_build / 4
+    b = "---"
 
-    table = TTY::Table.new [["#{$your_chaser.colorize(:red)}"], ['---'], ["$#{$high_offer}"], ["$#{$cash_build}"], ["$#{$low_offer}"], ["---"], ["---"], ["---"], ["Bank".colorize(:yellow)]]
-    puts table.render(:ascii, alignments: [:center])
+    opening_table = ["#{$your_chaser.colorize(:red)}", b, b, "$#{$cash_build}", b, b, b, b, "Bank".colorize(:yellow)]
+    puts opening_table.to_table
 
     $cash_choice = @prompt.select("Your chaser today is #{$your_chaser}!! Would you like to play for your cash build of $#{$cash_build}, take the low offer of $#{$low_offer}, or take the high offer of $#{$high_offer}?", 
     ["$#{$high_offer}", "$#{$cash_build}", "$#{$low_offer}"])
@@ -32,28 +46,28 @@ def round_2_intro
 
       case $cash_choice
           when "$#{$high_offer}"
-            table = TTY::Table.new [["#{$your_chaser.colorize(:red)}"], ['---'], ["#{$cash_choice}"], ['---'], ['---'], ["---"], ["---"], ["---"], ["Bank".colorize(:yellow)]]
-            puts table.render(:ascii, alignments: [:center])
+            high_table = ["#{$your_chaser.colorize(:red)}", b, "$#{$high_offer}", b, b, b, b, b, "Bank".colorize(:yellow)]
+            table = high_table
+            puts table.to_table
             $high_offer = $choice
             $to_home = 6.to_i
             puts "You'll need 6 correct answers to make it home."
           when "$#{$cash_build}"
-            table = TTY::Table.new [["#{$your_chaser.colorize(:red)}"], ['---'], ['---'], ["#{$cash_choice}"], ['---'], ["---"], ["---"], ["---"], ["Bank".colorize(:yellow)]]
-            puts table.render(:ascii, alignments: [:center])
+            mid_table = ["#{$your_chaser.colorize(:red)}", b, b, "$#{$cash_build}", b, b, b, b, "Bank".colorize(:yellow)]
+            table = mid_table
+            puts table.to_table
             $cash_build = $choice
             puts "You'll need 5 correct answers to make it home."
             $to_home = 5.to_i
           when "$#{$low_offer}"
-            table = TTY::Table.new [["#{$your_chaser.colorize(:red)}"], ['---'], ['---'], ['---'], ["#{$cash_choice}"], ["---"], ["---"], ["---"], ["Bank".colorize(:yellow)]]
-            puts table.render(:ascii, alignments: [:center])
+            low_table = ["#{$your_chaser.colorize(:red)}", b, b, b, "$#{low_offer}", b, b, b, "Bank".colorize(:yellow)]
+            table = low_table
+            puts table.to_table
             $low_offer = $choice
             puts "You'll need 4 correct answers to make it home."
             $to_home = 4.to_i
           end
   end
-
-
-
 
 round_2_intro
 
