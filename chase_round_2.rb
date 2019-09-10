@@ -1,8 +1,9 @@
-# require 'tty-prompt'
-# require 'text-table'
-# require 'ascii'
-# require 'colorize'
-# require 'json'
+require 'tty-prompt'
+require 'text-table'
+require 'ascii'
+require 'colorize'
+require 'json'
+# require_relative "chase_method"
 
 
 
@@ -32,10 +33,11 @@ $high_offer = "50000"
 $low_offer = "2000"
 $b = "---"
 
+
+
 def round_2_intro
 
-    opening_table = ["#{$your_chaser.colorize(:red)}", $b, "$#{$high_offer}", "$#{$cash_build}", "$#{$low_offer}", $b, $b, $b, "Bank".colorize(:yellow)]
-    puts opening_table.to_table
+
 
     $cash_choice = @prompt.select("Your chaser today is #{$your_chaser}!! Would you like to play for your cash build of $#{$cash_build}, take the low offer of $#{$low_offer}, or take the high offer of $#{$high_offer}?", 
     ["$#{$high_offer}", "$#{$cash_build}", "$#{$low_offer}"])
@@ -43,29 +45,56 @@ def round_2_intro
 
       case $cash_choice
           when "$#{$high_offer}"
-            high_table = ["#{$your_chaser.colorize(:red)}", $b, "$#{$high_offer}", $b, $b, $b, $b, $b, "Bank".colorize(:yellow)]
-            $table = high_table
-            puts $table.to_table
             $high_offer = $choice
-            $to_home = 6.to_i
+            $to_home = 2.to_i
             puts "You'll need 6 correct answers to make it to the bank."
           when "$#{$cash_build}"
-            mid_table = ["#{$your_chaser.colorize(:red)}", $b, $b, "$#{$cash_build}", $b, $b, $b, $b, "Bank".colorize(:yellow)]
-            $table = mid_table
-            puts $table.to_table
             $cash_build = $choice
             puts "You'll need 5 correct answers to make it to the bank."
-            $to_home = 5.to_i
+            $to_home = 3.to_i
           when "$#{$low_offer}"
-            low_table = ["#{$your_chaser.colorize(:red)}", $b, $b, $b, "$#{$low_offer}", $b, $b, $b, "Bank".colorize(:yellow)]
-            $table = low_table
-            puts $table.to_table
             $low_offer = $choice
             puts "You'll need 4 correct answers to make it to the bank."
             $to_home = 4.to_i
           end
   end
 
+  def create_opening_table(num_positions)
+    opening_table = []
+    $b = "----"
+    for pos in (1..num_positions)
+      opening_table << $b
+    end
+    return opening_table, opening_table.to_table
+    puts opening_table.to_table
+  end
+  
+  
+  def update_table(player_position, chaser_position)
+    table, diagram = create_opening_table(9)
+    table[-1] = "Bank"
+    table[player_position] = "#{$choice}"
+    table[chaser_position] = "#{$your_chaser}"
+    return table.to_table
+  end
+
+def caught?(player_position, chaser_position)
+  if chaser_position >= player_position
+    puts "Game Over! You've been caught by the Chaser!"
+    return true
+  end
+  return false
+end
+
+def won?(player_position, chaser_position)
+  if player_position >= 8
+    puts "Great work!"
+    sleep (2)
+    timer_three
+    return true
+  end
+  return false
+end
 
 $question_counter = 1
 
@@ -75,57 +104,40 @@ def get_questions_round_2
 end
 
 def run_round_2
-  questions_arr = Array.new(get_questions_round_2)
-  score_count = $to_home;
-  incorrect_count = 0
+  # Change player_position to $to_home
+  player_position = $to_home
+  chaser_position = 0
 
+  # Loads the questions
+  questions_arr = Array.new(get_questions_round_2)
+
+  # Checks if questions exist
   while questions_arr.length > 0
     curr_question = get_question(questions_arr)
     answer_choices = get_answers(curr_question)
 
     play($question_counter, curr_question, answer_choices)
-
     user_input = $selection
-
     correct_answer = curr_question['correct_answer']
 
-    
-    if user_input.downcase == correct_answer.downcase
-      puts "\nCorrect"
-      score_count -= 1
-        $table.insert(2,$b) #puts new b above cash
-        $table.delete_at(7) #deletes b above 'bank'
-        puts $table.to_table
-
-            if score_count != 0
-            puts "You'll need #{score_count} more to make it to the bank"
-            else puts "Nice job! You've made it!!"
-            timer_three
-            end
+    if correct_answer.downcase == user_input.downcase
+      player_position += 1
+      chaser_position += 1
+      break if won?(player_position, chaser_position)
+      break if caught?(player_position, chaser_position)
+      puts update_table(player_position, chaser_position)
+      puts "Correct".colorize(:green)
     else
-      incorrect_count += 1
-      puts "\nIncorrect"
+      chaser_position += 1
+      break if won?(player_position, chaser_position)
+      break if caught?(player_position, chaser_position)
+      puts update_table(player_position, chaser_position)
+      puts "\nIncorrect".colorize(:red)
+      puts "#{$your_chaser} says: #{$chaser_retorts.sample}"
       puts "The correct answer is #{correct_answer}."
-      puts "#{$your_chaser} says #{$chaser_retorts.sample}"
-      puts "That's #{incorrect_count} wrong so far.".colorize(:red)
-      puts $table.to_table
-      # chaser_method
     end
-    # if $question_counter % 4 != 0
-    #   puts "#{$your_chaser} chose the correct answer"
-    #   $table.insert(0,$b) #puts new b above cash
-    #   $table.delete_at(2) #deletes b below chaser
-    #   puts $table.to_table
-    # end
-
-
-
-    delete_question(questions_arr, curr_question)
-
-
   end
-
-  end
+end
 
 
 
@@ -146,8 +158,8 @@ def play(question_counter, question, answers)
   $selection = @prompt.select("#{question_counter}) #{question['question']}", answers)
 end
 
-
 def delete_question(questions, question)
   questions.delete(question)
 end
+
 

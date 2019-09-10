@@ -6,26 +6,26 @@ require 'json'
 require 'timeout'
 
 
-def get_questions
+def get_questions_three
     json_from_file = File.read("final_chase.json")
     JSON.parse(json_from_file)['results']
 end
 
 def begin_round_three
-  questions_arr = Array.new(get_questions)
+  questions_arr_three = Array.new(get_questions_three)
   $final_score = 0;
 
-  while questions_arr.length > 0
-    curr_question = get_question(questions_arr)
-    answer_choices = get_answers(curr_question)
+  while questions_arr_three.length > 0
+    curr_question_three = get_question_three(questions_arr_three)
+    answer_choices = get_answers_three(curr_question_three)
 
-    play_three(curr_question, answer_choices)
+    play_three(curr_question_three, answer_choices)
 
     user_input = gets.chomp
 
 
 
-    correct_answer = curr_question['correct_answer']
+    correct_answer = curr_question_three['correct_answer']
     if user_input.downcase == correct_answer.downcase
       puts "\nCorrect.".colorize(:green)
       $final_score += 1
@@ -35,19 +35,19 @@ def begin_round_three
       puts "The correct answer is #{correct_answer}."
     end
 
-    delete_question(questions_arr, curr_question)
+    delete_question(questions_arr_three, curr_question_three)
 
   end
 
 
 end
 
-def get_question(questions)
+def get_question_three(questions)
   i = rand(questions.length)
   question = questions[i]
 end
 
-def get_answers(question)
+def get_answers_three(question)
   choices = Array.new(question['incorrect_answers'])
   i = rand(choices.length)
   choices.insert(i, question['correct_answer'])
@@ -62,25 +62,23 @@ def delete_question(questions, question)
 end
 
 
+
 def timer_three
   begin
-    puts "Nice job! You've escaped The Chaser...for now...!! Now its time for the final Chase. If you score 20 or higher, you're home free with the cash!!".colorize(:color => :black, :background => :white)
-    result = Timeout::timeout(60) do
+    puts "Nice job! You've escaped The Chaser...for now...!! Now its time for the final Chase. If you score 20 or higher in 30 seconds, you're home free with the cash!!".colorize(:pink)
+    result = Timeout::timeout(30) do
     begin_round_three
     end
   rescue Timeout::Error
+    if $final_score < 5
+      puts "You've been caught! Better luck next time, ON THE CHASE!!"
+      sleep(5)
+      system 'clear'
+      exit
+    else puts 
+      "Well done! You've won #{$choice}!!"
+      system 'clear'
+      exit
   end
 end
-
-def finale
-  puts "Your final score is $#{$final_score}!"
-  if $final_score < 20
-    puts "You've been caught! Better luck next time, ON THE CHASE!!"
-    system 'clear'
-    exit
-  else puts 
-    "Well done! You've won #{$choice}!!"
-    system 'clear'
-    exit
-  end
 end

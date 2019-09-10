@@ -11,8 +11,8 @@ def initiate
     
     puts "Good evening and welcome to The Chase! Please enter your name:".colorize(:color => :black, :background => :white)
     print "> " 
-    name = gets.chomp
-    puts "Hi #{name}! Are you ready to play? (Y/N)".colorize(:color => :black, :background => :white)
+    $name = gets.chomp
+    puts "Hi #{$name}! Are you ready to play? (Y/N)".colorize(:color => :black, :background => :white)
     print "> "
     gets.chomp
 end

@@ -33,12 +33,12 @@ while questions_arr.length > 0
 
   correct_answer = curr_question['correct_answer']
   if user_input.downcase == correct_answer.downcase
-    puts "\nCorrect."
+    puts "\nCorrect.".colorize(:green)
     $cash_build += 2000
-    puts "Your cash build is now $#{$cash_build}.".colorize(:light_blue)
+    puts "Your cash build is now $#{$cash_build}.".colorize(:yellow)
   else
     puts "\nIncorrect."
-    puts "The correct answer is #{correct_answer}.".colorize(:color => :white, :background => :red)
+    puts "The correct answer is #{correct_answer}.".colorize(:red)
   end
 
   delete_question(questions_arr, curr_question)
@@ -72,7 +72,7 @@ begin
   end
 rescue Timeout::Error
   puts "Great work! Your final cash build is $#{$cash_build}!".colorize(:green)
-  sleep(5)
+  sleep(1)
   system 'clear'
   round_2_intro
   run_round_2
