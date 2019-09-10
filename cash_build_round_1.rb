@@ -37,8 +37,8 @@ while questions_arr.length > 0
     $cash_build += 2000
     puts "Your cash build is now $#{$cash_build}.".colorize(:yellow)
   else
-    puts "\nIncorrect."
-    puts "The correct answer is #{correct_answer}.".colorize(:red)
+    puts "\nIncorrect.".colorize(:red)
+    puts "The correct answer is #{correct_answer}.".colorize(:light_blue)
   end
 
   delete_question(questions_arr, curr_question)
@@ -72,7 +72,7 @@ begin
   end
 rescue Timeout::Error
   puts "Great work! Your final cash build is $#{$cash_build}!".colorize(:green)
-  sleep(1)
+  sleep(5)
   system 'clear'
   round_2_intro
   run_round_2

@@ -3,7 +3,7 @@ require 'text-table'
 require 'ascii'
 require 'colorize'
 require 'json'
-# require_relative "chase_method"
+
 
 
 
@@ -32,6 +32,7 @@ $your_chaser = $chasers.sample
 $high_offer = "50000"
 $low_offer = "2000"
 $b = "---"
+$name
 
 
 
@@ -46,15 +47,18 @@ def round_2_intro
       case $cash_choice
           when "$#{$high_offer}"
             $high_offer = $choice
-            $to_home = 6.to_i
-            puts "You'll need 6 correct answers to make it to the bank."
+            $to_home = 2.to_i
+            puts "You'll need 6 correct answers to make it to the bank.".colorize(:yellow)
+            puts update_table(2, 0)
           when "$#{$cash_build}"
             $cash_build = $choice
-            puts "You'll need 5 correct answers to make it to the bank."
-            $to_home = 5.to_i
+            puts "You'll need 5 correct answers to make it to the bank.".colorize(:yellow)
+            puts update_table(3, 0)
+            $to_home = 3.to_i
           when "$#{$low_offer}"
             $low_offer = $choice
-            puts "You'll need 4 correct answers to make it to the bank."
+            puts "You'll need 4 correct answers to make it to the bank.".colorize(:yellow)
+            puts update_table(4, 0)
             $to_home = 4.to_i
           end
   end
@@ -72,15 +76,18 @@ def round_2_intro
   
   def update_table(player_position, chaser_position)
     table, diagram = create_opening_table(9)
-    table[-1] = "Bank"
-    table[player_position] = "#{$choice}"
-    table[chaser_position] = "#{$your_chaser}"
+    table[-1] = "Bank".colorize(:yellow)
+    table[player_position] = "Player".colorize(:green)
+    table[chaser_position] = "#{$your_chaser}".colorize(:red)
     return table.to_table
   end
 
 def caught?(player_position, chaser_position)
   if chaser_position >= player_position
-    puts "Game Over! You've been caught by the Chaser!"
+    puts "Incorrect!".colorize(:red)
+    puts update_table(player_position, chaser_position)
+    sleep(3)
+    puts "Game Over! You've been caught by the Chaser!".colorize(:red)
     return true
   end
   return false
@@ -89,6 +96,7 @@ end
 def won?(player_position, chaser_position)
   if player_position >= 8
     puts "Great work!"
+    puts update_table(player_position, chaser_position)
     sleep (2)
     timer_three
     return true
@@ -133,8 +141,8 @@ def run_round_2
       break if caught?(player_position, chaser_position)
       puts update_table(player_position, chaser_position)
       puts "\nIncorrect".colorize(:red)
-      puts "#{$your_chaser} says: #{$chaser_retorts.sample}"
-      puts "The correct answer is #{correct_answer}."
+      puts "#{$your_chaser} says: #{$chaser_retorts.sample}".colorize(:light_blue)
+      puts "The correct answer is #{correct_answer}.".colorize(:yellow)
     end
   end
 end
@@ -163,5 +171,5 @@ def delete_question(questions, question)
 end
 
 
-round_2_intro
-run_round_2
+# round_2_intro
+# run_round_2

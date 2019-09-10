@@ -65,18 +65,20 @@ end
 
 def timer_three
   begin
-    puts "Nice job! You've escaped The Chaser...for now...!! Now its time for the final Chase. If you score 20 or higher in 30 seconds, you're home free with the cash!!".colorize(:pink)
+    puts "Nice job! You've escaped The Chaser...for now... It's time for the final Chase. If you score 10 or higher in 30 seconds, you're home free with the cash !! Let's begin!".colorize(:pink)
+    sleep(5)
     result = Timeout::timeout(30) do
     begin_round_three
     end
   rescue Timeout::Error
-    if $final_score < 5
-      puts "You've been caught! Better luck next time, ON THE CHASE!!"
+    if $final_score == 10
+      puts "Well done! You've won #{$choice}! Thanks for playing The Chase!"
       sleep(5)
       system 'clear'
       exit
     else puts 
-      "Well done! You've won #{$choice}!!"
+      sleep(5)
+      puts "You've been caught! Better luck next time, ON THE CHASE!!"
       system 'clear'
       exit
   end

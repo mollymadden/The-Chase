@@ -20,6 +20,7 @@ end
 
 if initiate.downcase == 'Y'.downcase
   puts "Let's jump straight into the cash build round. Each correct answer is worth $2000. You have 30 seconds to get as many correct answers as possible. Please note, all answers are ONE word or to be typed as numerals. THE CHASE IS ON!".colorize(:red)
+  sleep(5)
   timeout
 else
   puts "See you next time on THE CHASE! Goodbye."
