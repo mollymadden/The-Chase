@@ -46,12 +46,12 @@ def round_2_intro
       case $cash_choice
           when "$#{$high_offer}"
             $high_offer = $choice
-            $to_home = 2.to_i
+            $to_home = 6.to_i
             puts "You'll need 6 correct answers to make it to the bank."
           when "$#{$cash_build}"
             $cash_build = $choice
             puts "You'll need 5 correct answers to make it to the bank."
-            $to_home = 3.to_i
+            $to_home = 5.to_i
           when "$#{$low_offer}"
             $low_offer = $choice
             puts "You'll need 4 correct answers to make it to the bank."
@@ -163,3 +163,5 @@ def delete_question(questions, question)
 end
 
 
+round_2_intro
+run_round_2
