@@ -1,3 +1,10 @@
+require 'tty-prompt'
+require 'text-table'
+require 'ascii'
+require 'colorize'
+require 'json'
+require 'timeout'
+
 
 def get_questions
     json_from_file = File.read("final_chase.json")
@@ -57,18 +64,23 @@ end
 
 def timer_three
   begin
-    puts "Nice job! You've escaped The Chaser...for now...!! Now its time for the final Chase. If you score 20 or higher, you're home free with the cash!!"
+    puts "Nice job! You've escaped The Chaser...for now...!! Now its time for the final Chase. If you score 20 or higher, you're home free with the cash!!".colorize(:color => :black, :background => :white)
     result = Timeout::timeout(60) do
     begin_round_three
     end
   rescue Timeout::Error
-    puts "Your final score is $#{$final_score}!"
-    if $final_score < 20
-      puts "You've been caught! Better luck next time, ON THE CHASE!!"
-      system 'clear'
-    else puts 
-      "Well done! You've won #{$choice}!!"
-      system 'clear'
-    end
+  end
+end
+
+def finale
+  puts "Your final score is $#{$final_score}!"
+  if $final_score < 20
+    puts "You've been caught! Better luck next time, ON THE CHASE!!"
+    system 'clear'
+    exit
+  else puts 
+    "Well done! You've won #{$choice}!!"
+    system 'clear'
+    exit
   end
 end

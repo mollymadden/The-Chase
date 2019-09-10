@@ -99,8 +99,7 @@ def run_round_2
 
             if score_count != 0
             puts "You'll need #{score_count} more to make it to the bank"
-            else puts "Nice job! You've escaped The Chaser...for now...!!"
-              system 'clear'
+            else puts "Nice job! You've made it!!"
             timer_three
             end
     else
