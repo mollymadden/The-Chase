@@ -6,7 +6,7 @@ end
 
 def begin_round_three
   questions_arr = Array.new(get_questions)
-  final_score = 0;
+  $final_score = 0;
 
   while questions_arr.length > 0
     curr_question = get_question(questions_arr)
@@ -20,11 +20,11 @@ def begin_round_three
 
     correct_answer = curr_question['correct_answer']
     if user_input.downcase == correct_answer.downcase
-      puts "\nCorrect."
-      final_score += 1
-      puts "You've moved #{final_score} steps."
+      puts "\nCorrect.".colorize(:green)
+      $final_score += 1
+      puts "You've moved #{$final_score} steps."
     else
-      puts "\nIncorrect."
+      puts "\nIncorrect.".colorize(:red)
       puts "The correct answer is #{correct_answer}."
     end
 
@@ -32,7 +32,7 @@ def begin_round_three
 
   end
 
-  puts "Your final score is $#{final_score}! Can the Chaser catch you??"
+
 end
 
 def get_question(questions)
@@ -55,3 +55,20 @@ def delete_question(questions, question)
 end
 
 
+def timer_three
+  begin
+    puts "Nice job! You've escaped The Chaser...for now...!! Now its time for the final Chase. If you score 20 or higher, you're home free with the cash!!"
+    result = Timeout::timeout(60) do
+    begin_round_three
+    end
+  rescue Timeout::Error
+    puts "Your final score is $#{$final_score}!"
+    if $final_score < 20
+      puts "You've been caught! Better luck next time, ON THE CHASE!!"
+      system 'clear'
+    else puts 
+      "Well done! You've won #{$choice}!!"
+      system 'clear'
+    end
+  end
+end

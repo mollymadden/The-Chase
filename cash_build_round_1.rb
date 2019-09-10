@@ -7,14 +7,14 @@ require 'timeout'
 
 
 
-def get_questions
+def get_questions_one
   json_from_file = File.read("cash_build.json")
   JSON.parse(json_from_file)['results']
 end
 
 
 def run_game
-questions_arr = Array.new(get_questions)
+questions_arr = Array.new(get_questions_one)
 $cash_build = 0;
 
 
@@ -35,10 +35,10 @@ while questions_arr.length > 0
   if user_input.downcase == correct_answer.downcase
     puts "\nCorrect."
     $cash_build += 2000
-    puts "Your cash build is now $#{$cash_build}."
+    puts "Your cash build is now $#{$cash_build}.".colorize(:light_blue)
   else
     puts "\nIncorrect."
-    puts "The correct answer is #{correct_answer}."
+    puts "The correct answer is #{correct_answer}.".colorize(:color => :white, :background => :red)
   end
 
   delete_question(questions_arr, curr_question)
@@ -73,6 +73,7 @@ begin
 rescue Timeout::Error
   puts "Great work! Your final cash build is $#{$cash_build}!".colorize(:green)
   sleep(5)
+  system 'clear'
   round_2_intro
   run_round_2
 end
