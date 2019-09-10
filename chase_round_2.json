@@ -100,18 +100,14 @@
     "incorrect_answers":["Kuala Lumpur","Singapore","Tokyo"]},
     
     {"category":"General Knowledge","type":"multiple","difficulty":"medium",
-    "question":"A factiod is what?",
-    "correct_answer":"A falsehood",
+    "question":"A factoid is what?",
+    "correct_answer":"an item of unreliable information accepted as fact.",
     "incorrect_answers":["Useless trivia","A tiny fact","A scientific figure"]},
     
     {"category":"General Knowledge","type":"multiple","difficulty":"medium",
     "question":"What is the unit of currency in Laos?",
     "correct_answer":"Kip",
     "incorrect_answers":["Ruble","Konra","Dollar"]},
-
-    {"category":"Entertainment: Film","type":"multiple","difficulty":"medium",
-    "question":"In the movie The Iron Giant, this character is the protagonist.",
-    "correct_answer":"Hogarth Hughes","incorrect_answers":["Kent Mansley","Dean McCoppin","Annie Hughes"]},
     
     {"category":"Entertainment: Film","type":"multiple","difficulty":"medium",
     "question":"In which 1955 film does Frank Sinatra play Nathan Detroit?",
@@ -154,24 +150,9 @@
     "incorrect_answers":["Alec Guinness","Hayden Christensen","Liam Neeson"]},
     
     {"category":"Entertainment: Film","type":"multiple","difficulty":"medium",
-    "question":"Which animated film did Steven Lisberger direct in 1980 before going on to direct Tron?",
-    "correct_answer":"Animalympics",
-    "incorrect_answers":["The Fox and the Hound","The Black Cauldron","The Great Mouse Detecive"]},
-    
-    {"category":"Entertainment: Film","type":"multiple","difficulty":"easy",
-    "question":"In the 1992 film Army of Darkness, what name does Ash give to his double-barreled shotgun?",
-    "correct_answer":"Boomstick",
-    "incorrect_answers":["Bloomstick","Blastbranch","2-Pump Chump"]},
-    
-    {"category":"Entertainment: Film","type":"multiple","difficulty":"medium",
     "question":"What type of cheese, loved by Wallace and Gromit, had its sale prices rise after their successful short films?",
     "correct_answer":"Wensleydale",
     "incorrect_answers":["Cheddar","Moon Cheese","Edam"]},
-    
-    {"category":"Entertainment: Film","type":"multiple","difficulty":"easy",
-    "question":"In the 1995 film Balto, who are Steeles accomplices?",
-    "correct_answer":"Kaltag, Nikki, and Star",
-    "incorrect_answers":["Dusty, Kirby, and Ralph","Nuk, Yak, and Sumac","Jenna, Sylvie, and Dixie"]},
     
     {"category":"Entertainment: Film","type":"multiple","difficulty":"hard",
     "question":"In order to cut costs, what were most of the extras of Mad Max (1979) paid with?",
@@ -182,10 +163,6 @@
     "question":"Which actors made up the trio in The Good, the Bad, and the Ugly? ",
     "correct_answer":"Clint Eastwood, Eli Wallach, and Lee Van Cleef",
     "incorrect_answers":["Sergio Leone, Ennio Morricone, and Tonino Delli Colli","Yul Brynner, Steve McQueen, and Charles Bronson","Aldo Giuffre Grave, Mario Brega, and Luigi Pistilli"]},
-    
-    {"category":"Entertainment: Film","type":"multiple","difficulty":"easy",
-    "question":"Where does the original Friday The 13th movie take place?","correct_answer":"Camp Crystal Lake",
-    "incorrect_answers":["Packanack","Higgins Haven","Camp Forest Green"]},
     
     {"category":"Entertainment: Film","type":"multiple","difficulty":"easy",
     "question":"Which of these Movies was NOT released in 1996?",
@@ -248,20 +225,10 @@
     "incorrect_answers":["Twenty","Ten","One hundred"]},
     
     {"category":"General Knowledge","type":"multiple","difficulty":"medium",
-    "question":"Who is the founder of The Lego Group?",
-    "correct_answer":"Ole Kirk Christiansen",
-    "incorrect_answers":[" Jens Niels Christiansen","Kirstine Christiansen"," Gerhardt Kirk Christiansen"]},
-    
-    {"category":"General Knowledge","type":"multiple","difficulty":"medium",
     "question":"What is the last letter of the Greek alphabet?",
     "correct_answer":"Omega",
     "incorrect_answers":["Mu","Epsilon","Kappa"]},
-    
-    {"category":"General Knowledge","type":"multiple","difficulty":"medium",
-    "question":"The new One World Trade Center in Manhattan, New York City was designed by which architect? ",
-    "correct_answer":"David Childs",
-    "incorrect_answers":["Bjarke Ingels","Michael Arad","Fumihiko Maki"]},
-    
+
     {"category":"General Knowledge","type":"multiple","difficulty":"medium",
     "question":"What year was Apple Inc. founded?",
     "correct_answer":"1976",
@@ -276,10 +243,6 @@
     "question":"Which of the General Mills Corporations monster cereals was the last to be released in the 1970s?",
     "correct_answer":"Fruit Brute",
     "incorrect_answers":["Count Chocula","Franken Berry","Boo-Berry"]},
-    
-    {"category":"General Knowledge","type":"multiple","difficulty":"medium",
-    "question":"When was Hubba Bubba first introduced?",
-    "correct_answer":"1979","incorrect_answers":["1984","1972","1980"]},
     
     {"category":"General Knowledge","type":"multiple","difficulty":"medium",
     "question":"Which iconic Disneyland attraction was closed in 2017 to be remodeled as a Guardians of the Galaxy themed ride?",
@@ -318,7 +281,7 @@
     {"category":"General Knowledge","type":"multiple","difficulty":"medium",
     "question":"What is real haggis made of?",
     "correct_answer":"Sheeps Heart, Liver and Lungs",
-    "incorrect_answers":["Sheeps Heart, Kidneys and Lungs","Sheeps Liver, Kidneys and Eyes","Whole Sheep"]},
+    "incorrect_answers":["Goats Heart, Kidneys and Lungs","Sheeps Brain, Kidneys and Eyes","Whole Sheep"]},
     
     {"category":"General Knowledge","type":"multiple","difficulty":"medium",  
     "question":"Earl Grey tea is black tea flavoured with what?",
@@ -330,11 +293,7 @@
     "question":"Where did the pineapple plant originate?",
     "correct_answer":"South America",    
     "incorrect_answers":["Hawaii","Europe","Asia"]},
-    
-    {"category":"General Knowledge","type":"multiple","difficulty":"medium",
-    "question":"Whose greyscale face is on the kappa emoticon on Twitch?",
-    "correct_answer":"Josh DeSeno",
-    "incorrect_answers":["Justin DeSeno","John DeSeno","Jimmy DeSeno"]},
+
     
     {"category":"General Knowledge","type":"multiple","difficulty":"medium",
     "question":"Which of these words means idle spectator?",    
@@ -370,16 +329,6 @@
     "question":"Who won the 2015 Formula 1 World Championship?",
     "correct_answer":"Lewis Hamilton",
     "incorrect_answers":["Nico Rosberg","Sebastian Vettel","Jenson Button"]},
-   
-    {"category":"Entertainment: Video Games","type":"multiple","difficulty":"easy",
-    "question":"In the game Dark Souls, what is the name of the region youre in for the majority of the game?",
-    "correct_answer":"Lordran",
-    "incorrect_answers":["Drangleic","Oolacile","Catarina"]},
-    
-    {"category":"Entertainment: Japanese Anime & Manga","type":"boolean","difficulty":"easy",
-    "question":"No Game No Life first aired in 2014.",
-    "correct_answer":"True",
-    "incorrect_answers":["False"]},
     
     {"category":"Entertainment: Music","type":"multiple","difficulty":"easy",
     "question":"In an orchestra, what is the lowest member of the brass family?",
@@ -396,11 +345,6 @@
     "correct_answer":"True",
     "incorrect_answers":["False"]},
     
-    {"category":"Sports","type":"multiple","difficulty":"easy",
-    "question":"What team won the 2016 MLS Cup?",
-    "correct_answer":"Seattle Sounders",
-    "incorrect_answers":["Colorado Rapids","Toronto FC","Montreal Impact"]},
-    
     {"category":"Entertainment: Music","type":"multiple","difficulty":"easy",
     "question":"What album did The Lumineers release in 2016?",
     "correct_answer":"Cleopatra",
@@ -410,21 +354,6 @@
     "question":"In Minecraft, which two items must be combined to craft a torch?",
     "correct_answer":"Stick and Coal",
     "incorrect_answers":["Stick and Fire","Wood and Coal","Wood and Fire"]},
-    
-    {"category":"Entertainment: Video Games","type":"multiple","difficulty":"easy",
-    "question":"Which Fallout: New Vegas quest is NOT named after a real-life song?",
-    "correct_answer":"They Went That-a-Way",
-    "incorrect_answers":["Come Fly With Me","Aint That a Kick in the Head","Ring-a-Ding Ding"]},
-    
-    {"category":"Vehicles","type":"multiple","difficulty":"easy",
-    "question":"The LS1 engine is how many cubic inches?",
-    "correct_answer":"346",
-    "incorrect_answers":["350","355","360"]},
-    
-    {"category":"Entertainment: Video Games","type":"multiple","difficulty":"easy",
-    "question":"Which of the following is not a character in the Street Fighter series?",
-    "correct_answer":"Mai Shiranui",
-    "incorrect_answers":["Laura Matsuda","Sakura Kasugano","Ibuki"]},
     
     {"category":"Entertainment: Television","type":"multiple","difficulty":"easy",
     "question":"In Star Trek: Voyager, which episode did Voyager establish real-time communication with Starfleet Headquarters?",
