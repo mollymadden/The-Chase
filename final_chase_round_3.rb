@@ -24,7 +24,6 @@ def begin_round_three
     user_input = gets.chomp
 
 
-
     correct_answer = curr_question_three['correct_answer']
     if user_input.downcase == correct_answer.downcase
       puts "\nCorrect.".colorize(:green)

@@ -3,7 +3,7 @@ require_relative "./chase_round_2"
 require_relative "./final_chase_round_3"
 
 def intro_sound
-  pid = fork{ exec 'afplay', "intro_sound.mov" }
+  pid = fork{ exec 'afplay', "intro_sound.mov"}
 end
 
 def initiate
