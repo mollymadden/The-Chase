@@ -71,7 +71,6 @@ def timer_three
     end
   rescue Timeout::Error
     if $final_score >= 10
-      break
       sleep(5)
       puts "Well done! You've won #{$choice}! Thanks for playing The Chase!"
       sleep(5)
