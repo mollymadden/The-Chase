@@ -144,8 +144,10 @@ def run_round_2
       puts "#{$your_chaser} says: #{$chaser_retorts.sample}".colorize(:light_blue)
       puts "The correct answer is #{correct_answer}.".colorize(:yellow)
     end
+    delete_question(questions_arr, curr_question)
   end
 end
+
 
 
 

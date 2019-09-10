@@ -70,7 +70,9 @@ def timer_three
     begin_round_three
     end
   rescue Timeout::Error
-    if $final_score == 10
+    if $final_score >= 10
+      break
+      sleep(5)
       puts "Well done! You've won #{$choice}! Thanks for playing The Chase!"
       sleep(5)
       system 'clear'
@@ -78,6 +80,7 @@ def timer_three
     else puts 
       sleep(5)
       puts "You've been caught! Better luck next time, ON THE CHASE!!"
+      sleep(5)
       system 'clear'
       exit
   end
