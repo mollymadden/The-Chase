@@ -1,8 +1,3 @@
-require 'rest-client'
-require 'json'
-require 'pry'
-
-
 
 def get_questions
     json_from_file = File.read("final_chase.json")
@@ -17,7 +12,7 @@ def begin_round_three
     curr_question = get_question(questions_arr)
     answer_choices = get_answers(curr_question)
 
-    play(curr_question, answer_choices)
+    play_three(curr_question, answer_choices)
 
     user_input = gets.chomp
 
@@ -51,7 +46,7 @@ def get_answers(question)
   choices.insert(i, question['correct_answer'])
 end
 
-def play(question, answers)
+def play_three(question, answers)
   puts "#{question['question']}"
 end
 
@@ -60,4 +55,3 @@ def delete_question(questions, question)
 end
 
 
-begin_round_three

@@ -1,14 +1,13 @@
-require 'tty-prompt'
-require 'text-table'
-require 'ascii'
-require 'colorize'
-require 'json'
+# require 'tty-prompt'
+# require 'text-table'
+# require 'ascii'
+# require 'colorize'
+# require 'json'
 
 
 
 
 @prompt = TTY::Prompt.new
-
 
 
 $chaser_retorts = 
@@ -29,14 +28,11 @@ $chaser_retorts =
 $chasers = ["The Beast", "The Shark", "The Governess", "Goliath", "The Supernerd"]
 $your_chaser = $chasers.sample
 
-$cash_build = 26000
-$high_offer = $cash_build * 3
-$low_offer = $cash_build / 4
+$high_offer = "50000"
+$low_offer = "2000"
 $b = "---"
 
 def round_2_intro
-
-
 
     opening_table = ["#{$your_chaser.colorize(:red)}", $b, "$#{$high_offer}", "$#{$cash_build}", "$#{$low_offer}", $b, $b, $b, "Bank".colorize(:yellow)]
     puts opening_table.to_table
@@ -70,7 +66,6 @@ def round_2_intro
           end
   end
 
-round_2_intro
 
 $question_counter = 1
 
@@ -105,7 +100,7 @@ def run_round_2
             if score_count != 0
             puts "You'll need #{score_count} more to make it to the bank"
             else puts "Nice job! You've made it!!"
-            # begin_round_3
+            begin_round_three
             end
     else
       incorrect_count += 1
@@ -156,4 +151,3 @@ def delete_question(questions, question)
   questions.delete(question)
 end
 
-run_round_2

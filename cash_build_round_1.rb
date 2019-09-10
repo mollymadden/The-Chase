@@ -1,76 +1,81 @@
 require 'tty-prompt'
-require 'tty-table'
+require 'text-table'
 require 'ascii'
 require 'colorize'
 require 'json'
 require 'timeout'
 
+
+
 def get_questions
-    json_from_file = File.read("cash_build.json")
-    JSON.parse(json_from_file)['results']
+  json_from_file = File.read("cash_build.json")
+  JSON.parse(json_from_file)['results']
 end
 
 
 def run_game
-  questions_arr = Array.new(get_questions)
-  $cash_build = 0;
+questions_arr = Array.new(get_questions)
+$cash_build = 0;
 
-  while questions_arr.length > 0
-    curr_question = get_question(questions_arr)
-    answer_choices = get_answers(curr_question)
 
-    play(curr_question, answer_choices)
+while questions_arr.length > 0
+  curr_question = get_question(questions_arr)
+  answer_choices = get_answers(curr_question)
 
-    user_input = gets.chomp
+  play_one(curr_question, answer_choices)
 
-    if user_input.downcase == 'exit' || user_input.downcase == 'quit' || user_input.downcase == 'stop'
-      puts "Okay, goodbye!"
-      return
-    end
+  user_input = gets.chomp
 
-    correct_answer = curr_question['correct_answer']
-    if user_input.downcase == correct_answer.downcase
-      puts "\nCorrect."
-      $cash_build += 2000
-      puts "Your cash build is now $#{$cash_build}."
-    else
-      puts "\nIncorrect."
-      puts "The correct answer is #{correct_answer}."
-    end
-
-    delete_question(questions_arr, curr_question)
+  if user_input.downcase == 'exit' || user_input.downcase == 'quit' || user_input.downcase == 'stop'
+    puts "Okay, goodbye!"
+    return
   end
+
+  correct_answer = curr_question['correct_answer']
+  if user_input.downcase == correct_answer.downcase
+    puts "\nCorrect."
+    $cash_build += 2000
+    puts "Your cash build is now $#{$cash_build}."
+  else
+    puts "\nIncorrect."
+    puts "The correct answer is #{correct_answer}."
+  end
+
+  delete_question(questions_arr, curr_question)
+end
 end
 
 def get_question(questions)
-  i = rand(questions.length)
-  question = questions[i]
+i = rand(questions.length)
+question = questions[i]
 end
 
 def get_answers(question)
-  choices = Array.new(question['incorrect_answers'])
-  i = rand(choices.length)
-  choices.insert(i, question['correct_answer'])
+choices = Array.new(question['incorrect_answers'])
+i = rand(choices.length)
+choices.insert(i, question['correct_answer'])
 end
 
-def play(question, answers)
-  puts "#{question['question']}"
+def play_one(question, answers)
+puts "#{question['question']}"
 end
 
 def delete_question(questions, question)
-  questions.delete(question)
+questions.delete(question)
 end
 
 
 def timeout
-  begin
-    result = Timeout::timeout(30) do
-    run_game
-    end
-  rescue Timeout::Error
-    puts "Great work! Your final cash build is $#{$cash_build}!"
-    # round_2_intro
+begin
+  result = Timeout::timeout(30) do
+  run_game
   end
+rescue Timeout::Error
+  puts "Great work! Your final cash build is $#{$cash_build}!".colorize(:green)
+  sleep(5)
+  round_2_intro
+  run_round_2
+end
 end
 
 # ////////////////////////////////////begin round two////////////////////////////////////
