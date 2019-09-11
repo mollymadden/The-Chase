@@ -1,29 +1,23 @@
-require_relative "./chase_round_2.rb"
+require_relative "chase_round_2.rb"
+require_relative "final_chase_round_3.rb"
 
 
-# Both Tests 1 and 2 come from the same method as I do not have many other methods in my code that do not have dependencies. The method discussed for use between Rach and myself, being the JSON parse method noted in file titled 'chase_round_2' on line 107 remitted an error that I could not bypass or use binding.pry on, which was "No such file or directory @ rb_sysopen - ./final_chase.json (Errno::ENOENT)."
-
-# Although I spent a significant amount of time trying to resolve this issue for the purposes of Test 2, unfortunately I could not proceed and was forced to test on the only other method without dependencies, being the same as Test 1.
 
 
-#  Test 1 - Check length of method.
+# #  Test 1 - Check that method is producing an array of the same length as the argument it is passed
 expected = 10
 result = puts create_opening_table(10)[0]
 if create_opening_table(10)[0].length == expected
   puts "yay"
-return true
 else
   puts "uh oh"
-  return false
 end
 
 
-# Test 2 - Check contents of method.
-expected = true
-result = puts create_opening_table(1)[0].include?("----")
-if result == expected
+# # Test 2 - Check length of Round 3 question bank
+expected = 30
+if get_questions_three.length == 30
   puts "noice"
 else
-  puts "wut"
+  puts "what happened?"
 end
-
