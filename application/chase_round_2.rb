@@ -12,19 +12,17 @@ require 'json'
 
 
 $chaser_retorts = 
-["isn't it obvious you silly git!", "are you having a laugh?", 
-"come off it numpty!", 
-"you're mad as a bag of ferrets.", 
-"that answer was positively barmy!",
-"you sir are a nitwit!", 
-"wrong as a pointed-eared hobgoblin!", 
-"you are about one bit short of a byte.",
-"you are a sad strange little man, and you have my pity.", 
-"your mother was a hamster and your father smelled of elderbrries!", 
-"I do desire we may be better strangers.",
-"you answer like your momma. unless of course she answers correctly, in which case you answer nothing like her.", 
-"to call you stupid would be an insult to stupid people!", 
-"I've known sheep that could outwit you."]    
+["Isn't it obvious you silly git!", 
+"Come off it numpty!", 
+"You're mad as a bag of ferrets.", 
+"That answer was positively barmy!",
+"You sir are a nitwit!", 
+"Wrong as a pointed-eared hobgoblin!", 
+"You are about one bit short of a byte.",
+"You are a sad strange little man, and you have my pity.", 
+"Your mother was a hamster and your father smelled of elderberries!",
+"You answer like your momma. unless of course she answers correctly, in which case you answer nothing like her.", 
+"To call you stupid would be an insult to stupid people!"]    
 
 $chasers = ["The Beast", "The Shark", "The Governess", "Goliath", "The Supernerd"]
 $your_chaser = $chasers.sample
@@ -40,7 +38,7 @@ def round_2_intro
 
 
 
-    $cash_choice = @prompt.select("Your chaser today is #{$your_chaser}!! Would you like to play for your cash build of $#{$cash_build}, take the low offer of $#{$low_offer}, or take the high offer of $#{$high_offer}?", 
+    $cash_choice = @prompt.select("Your chaser today is #{$your_chaser}!! This Chaser is THE BEST and gets every question correct! Would you like to play for your cash build of $#{$cash_build}, take the low offer of $#{$low_offer}, or take the high offer of $#{$high_offer}?", 
     ["$#{$high_offer}", "$#{$cash_build}", "$#{$low_offer}"])
 
 
@@ -70,7 +68,7 @@ def round_2_intro
       opening_table << $b
     end
     return opening_table, opening_table.to_table
-    puts opening_table.to_table
+    # puts opening_table.to_table
   end
   
   
@@ -143,7 +141,7 @@ def run_round_2
       puts "\nIncorrect".colorize(:red)
       puts "#{$your_chaser} says: #{$chaser_retorts.sample}".colorize(:light_blue)
       puts "The correct answer is #{correct_answer}.".colorize(:yellow)
-    end
+      end
     delete_question(questions_arr, curr_question)
   end
 end

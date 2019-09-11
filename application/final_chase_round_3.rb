@@ -7,7 +7,7 @@ require 'timeout'
 
 
 def get_questions_three
-    json_from_file = File.read("final_chase.json")
+    json_from_file = File.read("./final_chase.json")
     JSON.parse(json_from_file)['results']
 end
 
@@ -64,21 +64,21 @@ end
 
 def timer_three
   begin
-    puts "Nice job! You've escaped The Chaser...for now... It's time for the final Chase. If you score 10 or higher in 30 seconds, you're home free with the cash !! Let's begin!".colorize(:pink)
+    puts "Nice job! You've escaped The Chaser...for now... It's time for the final Chase. If you score 10 or higher in 30 seconds, you're home free with the cash !! Let's begin!".colorize(:red)
     sleep(5)
     result = Timeout::timeout(30) do
     begin_round_three
     end
   rescue Timeout::Error
     if $final_score >= 10
-      sleep(5)
+      sleep(3)
       puts "Well done! You've won #{$choice}! Thanks for playing The Chase!"
       sleep(5)
       system 'clear'
       exit
     else puts 
-      sleep(5)
-      puts "You've been caught! Better luck next time, ON THE CHASE!!"
+      sleep(3)
+      puts "You've been caught! Say goodbye to that sweet sweet cash! Better luck next time, on THE CHASE"
       sleep(5)
       system 'clear'
       exit

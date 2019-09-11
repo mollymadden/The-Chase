@@ -8,7 +8,7 @@ end
 
 def initiate
     intro_sound
-    
+    system 'clear'
     puts "Good evening and welcome to The Chase! Please enter your name:".colorize(:color => :black, :background => :white)
     print "> " 
     $name = gets.chomp
@@ -19,7 +19,9 @@ end
 
 
 if initiate.downcase == 'Y'.downcase
-  puts "Let's jump straight into the cash build round. Each correct answer is worth $2000. You have 30 seconds to get as many correct answers as possible. Please note, all answers are ONE word or to be typed as numerals. THE CHASE IS ON!".colorize(:red)
+  puts "Let's jump straight into the cash build round. Each correct answer is worth $2000. You have 30 seconds to get as many correct answers as possible.".colorize(:red)
+  sleep(1) 
+  puts "Please note, all answers are ONE word or to be typed as numerals. THE CHASE IS ON!".colorize(:red)
   sleep(5)
   timeout
 else
