@@ -99,8 +99,8 @@ In Round 2, I tested to ensure that my method to generate a table from an array 
 
 For Round 3, I tested to determine that all questions were being captured by the 'gets_questions_three' method which pulls trivia questions from a JSON file and parses them. The test passed with an expected answer of 30.
 
-![Image of Control Flow](https://raw.githubusercontent.com/mollymadden/The-Chase/blob/master/Molly-Madden-T1A25-Control-Flow-Diagram.png)
+![Image of Control Flow](https://ibb.co/NxvNwb7)
 
-![Image of Trello Board](https://raw.githubusercontent.com/mollymadden/The-Chase/blob/master/Molly-Madden-TA4567-Trello-Board.png)
+![Image of Trello Board](https://ibb.co/yh5tKFr)
 
 
