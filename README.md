@@ -67,7 +67,7 @@ Should the user answer questions correctly, they move forward; if not, the game 
 ## Known issues
 - App is not recognizing all variables across related files - thus loss of integrity in round 2 when ````#{name}```` has been hardcoded ````"player."````
 - Was forced to use global variables in order to carry some variables across multiple files- against best practice.
-- Round two was written first and therefore ````'get question'```` and ````'get answer'```` methods require a question and 4 answers from JSON file parse method. This code was repurposed for rounds one and two but I could not manage in the allotted time frame to reconfigure code to suit. Placeholder answers of "A,B,C" have been provided in applicable JSON files for these rounds.
+- Round two was written first and therefore ````'get question'```` and ````'get answer'```` methods require a question and 4 answers from JSON file parse method. This code was repurposed for rounds one and three but I could not manage in the allotted time frame to reconfigure code to suit. Placeholder answers of "A,B,C" have been provided in applicable JSON files for these rounds.
 
 
 
