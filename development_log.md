@@ -1,4 +1,4 @@
-# Status 1 - Firday 6/9
+# Status 1 - Friday 6/9
 
 Changed direction with Terminal Application assessment from Family Tree to The Chase. The reason for this change is because the features that I had envisioned for Family Tree were not acheivable in the timeframe with my skillset, and as features were wittled away so too was the purpose of the project. I did not foresee a minimum viable product that would be able to produce more than a re-wording of information provided by the user. I intend to re-visit this project in future as my skills progress and I learn about other technologies and languages, and as I gain a better understanding of pure Ruby.
 
